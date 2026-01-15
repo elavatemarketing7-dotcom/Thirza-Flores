@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dra. Thirza Flores | Harmonização Facial de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@200;300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --brown-deep: #2D1E17;
+        --brown-primary: #4A3728;
+        --brown-soft: #8B5E3C;
+        --white-pure: #FFFFFF;
+        --white-off: #F9F7F5;
+        --glass-light: rgba(255, 255, 255, 0.8);
+      }
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--white-pure);
+        color: var(--brown-deep);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .font-playfair { font-family: 'Playfair Display', serif; }
+      .font-dancing { font-family: 'Dancing Script', cursive; }
+      
+      .text-brown { color: var(--brown-primary); }
+      .bg-brown { background-color: var(--brown-primary); }
+      .border-brown { border-color: var(--brown-primary); }
+
+      @keyframes ticker {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-ticker {
+        display: flex;
+        width: fit-content;
+        animation: ticker 40s linear infinite;
+      }
+      
+      html { scroll-behavior: smooth; }
+
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: var(--white-off); }
+      ::-webkit-scrollbar-thumb { background: var(--brown-soft); }
+
+      .glass-pill {
+        background: var(--glass-light);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(74, 55, 40, 0.1);
+        border-radius: 100px;
+      }
+
+      .editorial-shadow {
+        box-shadow: 0 20px 40px rgba(45, 30, 23, 0.05);
+      }
+
+      .mask-image-light {
+        mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

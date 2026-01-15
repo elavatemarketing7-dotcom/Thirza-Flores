@@ -1,0 +1,8 @@
+{
+  "name": "Dr. Thirza Flores - Harmonização Facial Premium",
+  "description": "Uma landing page de alta conversão, mobile-first, para a Dra. Thirza Flores, focada em harmonização facial com resultados naturais e agendamento via WhatsApp.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
