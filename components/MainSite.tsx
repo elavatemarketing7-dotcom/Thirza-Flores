@@ -35,6 +35,8 @@ const MainSite: React.FC = () => {
     }
   };
 
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(EXPERT_INFO.address)}`;
+
   return (
     <div className="relative bg-white selection:bg-[#4A3728] selection:text-white">
       {/* Navigation Pill */}
@@ -58,9 +60,10 @@ const MainSite: React.FC = () => {
       <header className="relative min-h-screen flex flex-col justify-center items-center py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://i.imgur.com/oTBC9tP.png" 
+            src={MEDIA.mainHero} 
             alt="Dra. Thirza Flores Hero" 
             className="w-full h-full object-cover object-top opacity-40 md:opacity-50"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white/90"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-white/60"></div>
@@ -100,12 +103,13 @@ const MainSite: React.FC = () => {
                 <video 
                   ref={videoRef}
                   src={MEDIA.introVideo} 
-                  autoPlay 
+                  poster={MEDIA.mainHero}
                   muted 
+                  autoPlay 
                   loop 
                   playsInline 
-                  preload="auto"
-                  className="w-full h-full object-cover" 
+                  preload="metadata"
+                  className="w-full h-full object-cover transition-opacity duration-1000" 
                 />
               </div>
            </div>
@@ -140,7 +144,7 @@ const MainSite: React.FC = () => {
                 onClick={() => setActiveImage(url)}
                 className="w-64 sm:w-80 flex-shrink-0 relative group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-700 aspect-[3/4]"
               >
-                <img src={url} alt={`Resultado ${idx}`} className="w-full h-full object-cover" />
+                <img src={url} alt={`Resultado ${idx}`} className="w-full h-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-[#4A3728]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
             ))}
@@ -168,6 +172,7 @@ const MainSite: React.FC = () => {
                   src={url} 
                   alt={`Harmonização Gallery ${idx}`} 
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" 
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#4A3728]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
@@ -198,6 +203,7 @@ const MainSite: React.FC = () => {
                     src={url} 
                     alt={`Comentário ${idx}`} 
                     className="w-full h-auto rounded-[2.5rem] grayscale hover:grayscale-0 transition-all duration-700" 
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -220,7 +226,7 @@ const MainSite: React.FC = () => {
       <section id="sobre-mim" className="py-32 px-6 bg-[#F9F7F5] relative">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
           <div className="relative order-2 md:order-1">
-             <img src={MEDIA.secondaryHero} alt="Dra. Thirza" className="w-full rounded-[4rem] shadow-2xl grayscale" />
+             <img src={MEDIA.secondaryHero} alt="Dra. Thirza" className="w-full rounded-[4rem] shadow-2xl grayscale" loading="lazy" />
              <div className="absolute top-10 -right-10 bg-white p-10 rounded-[2.5rem] shadow-xl border border-[#4A3728]/5 hidden lg:block">
                 <p className="text-[#4A3728] font-playfair font-bold text-4xl mb-2 italic">A Expert</p>
                 <p className="text-[#8B5E3C] text-[10px] uppercase tracking-widest font-bold">Por trás da técnica</p>
@@ -249,7 +255,7 @@ const MainSite: React.FC = () => {
       {/* Address */}
       <section id="onde-encontrar" className="py-32 px-6 bg-white">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-20 items-center">
-          <div className="w-full md:w-1/2 space-y-12">
+          <div className="w-full md:w-1/2 space-y-12 text-left">
             <div className="space-y-6">
               <span className="text-[#8B5E3C] font-bold text-[10px] uppercase tracking-[0.4em]">Localização</span>
               <h2 className="text-5xl font-playfair font-bold text-[#4A3728]">Nosso <br/><span className="italic">Santuário.</span></h2>
@@ -257,25 +263,48 @@ const MainSite: React.FC = () => {
                 Projetado para oferecer o máximo de privacidade e conforto em cada etapa da sua jornada estética.
               </p>
             </div>
-            <div className="space-y-6">
-              <div className="flex items-start gap-6 border-l-2 border-[#8B5E3C]/20 pl-6">
-                <p className="text-sm text-[#4A3728] leading-loose font-medium">{EXPERT_INFO.address}</p>
-              </div>
+            <div className="space-y-8">
               <a 
-                href={EXPERT_INFO.whatsapp}
+                href={googleMapsUrl}
                 target="_blank"
-                className="inline-block text-[#8B5E3C] font-black text-[11px] uppercase tracking-[0.3em] border-b border-[#8B5E3C]/30 pb-2 hover:text-[#4A3728] hover:border-[#4A3728] transition-all"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-6 border-l-2 border-[#8B5E3C]/20 pl-6 hover:border-[#8B5E3C] transition-all"
               >
-                Solicitar Localização
+                <div>
+                  <p className="text-sm text-[#4A3728] leading-loose font-medium group-hover:text-[#8B5E3C] transition-colors">{EXPERT_INFO.address}</p>
+                  <p className="text-[9px] uppercase tracking-widest font-bold text-[#8B5E3C]/60 mt-2">Clique para abrir no GPS</p>
+                </div>
               </a>
+              <div className="flex gap-4">
+                <a 
+                  href={googleMapsUrl}
+                  target="_blank"
+                  className="inline-block bg-[#F9F7F5] border border-[#4A3728]/10 px-8 py-4 rounded-full text-[#4A3728] font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-[#4A3728] hover:text-white transition-all shadow-sm"
+                >
+                  Ver no Mapa
+                </a>
+                <a 
+                  href={EXPERT_INFO.whatsapp}
+                  target="_blank"
+                  className="inline-block text-[#8B5E3C] font-black text-[10px] uppercase tracking-[0.2em] border-b border-[#8B5E3C]/30 pb-2 hover:text-[#4A3728] hover:border-[#4A3728] transition-all self-center ml-4"
+                >
+                  Solicitar Direções
+                </a>
+              </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 h-[600px] rounded-[4rem] overflow-hidden shadow-2xl grayscale transition-all duration-1000 hover:grayscale-0 border border-[#4A3728]/10">
+          <a 
+            href={googleMapsUrl}
+            target="_blank"
+            className="w-full md:w-1/2 h-[500px] rounded-[4rem] overflow-hidden shadow-2xl grayscale transition-all duration-1000 hover:grayscale-0 border border-[#4A3728]/10 block"
+          >
             <iframe 
               width="100%" height="100%" frameBorder="0" 
               src={`https://maps.google.com/maps?q=${encodeURIComponent(EXPERT_INFO.address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+              loading="lazy"
+              className="pointer-events-none"
             />
-          </div>
+          </a>
         </div>
       </section>
 
